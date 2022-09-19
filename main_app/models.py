@@ -3,6 +3,7 @@ from datetime import date
 # from django.contrib.auth.models import User
 from django.urls import reverse
 
+
 # Create your models here.
 
 langauges = (
@@ -21,8 +22,8 @@ class Error(models.Model):
   solution = models.TextField()
   date = models.DateField('error date')
   # user = models.ForeignKey(User, on_delete=models.CASCADE)
- 
 
+ 
   def __str__(self):
     return self.title
 
