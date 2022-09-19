@@ -7,3 +7,4 @@ class Admins(admin.ModelAdmin):
 
 admin.site.register(Error)
 admin.site.register(Comment)
+admin.site.register(Screenshot)
