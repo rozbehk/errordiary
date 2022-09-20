@@ -48,3 +48,7 @@ body {
 .comment-box {
     display: block;
 }
+
+.comment-card {
+    text-align: right;
+}
