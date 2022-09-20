@@ -1,12 +1,12 @@
 from django.db import models
 from datetime import date
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 from django.urls import reverse
 
 
 # Create your models here.
 
-langauges = (
+LANGUAGES = (
   ('JS', 'Javascript'),
   ('HTML', 'HTML'),
   ('CSS', 'CSS'),
@@ -17,11 +17,15 @@ langauges = (
 
 class Error(models.Model):
   title = models.CharField(max_length=100)
-  language = models.CharField(max_length=50)
+  language = models.CharField(
+    max_length=10,
+    choices=LANGUAGES,
+    default=LANGUAGES[0][0]
+  )
   description = models.TextField()
   solution = models.TextField()
   date = models.DateField('error date')
-  # user = models.ForeignKey(User, on_delete=models.CASCADE)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
 
  
   def __str__(self):
@@ -40,8 +44,17 @@ class Comment(models.Model):
     
 class Screenshot(models.Model):
   url = models.CharField(max_length=200)
-  # user = models.ForeignKey(User, on_delete=models.CASCADE)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
   error = models.ForeignKey(Error, on_delete=models.CASCADE)
+
+# class Upvote(models.Model):
+#   error = models.ForeignKey(Error, on_delete=models.CASCADE)
+#   # user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+# class Downvote(models.Model):
+#   error = models.ForeignKey(Error, on_delete=models.CASCADE)
+#   # user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 
 
 
