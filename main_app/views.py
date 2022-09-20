@@ -18,7 +18,8 @@ class ErrorDelete(DeleteView):
   success_url = '/errors/'
 
 def home(request):
-  return render(request, 'home.html')
+  errors = Error.objects.all()
+  return render(request, 'home.html', { 'errors': errors })
 
 def about(request):
   return render(request, 'about.html')
