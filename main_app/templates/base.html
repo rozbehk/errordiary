@@ -24,21 +24,27 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
               </li>
-              {% if User %}
+              {% if user.is_authenticated %}
               <li class="nav-item">
-                <a class="nav-link" href="">My Errors</a>
+                <a class="nav-link" href="{% url 'index' %}">My Errors</a>
               </li>
               {% endif %}
             </ul>
           </div>
-            <div class="login navbar-collapse justify-content-end">
-                <ul class="navbar-nav">
+          <div class="login navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+              {% if user.is_authenticated %}
               <li class="nav-item">
-                <a class="nav-link" href="#">Log-in</a>
+                <a class="nav-link " href="{% url 'logout' %}">Log Out</a>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Log-in</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link ">Sign-Up</a>
+                <a class="nav-link " href="{% url 'signup' %}">Sign-Up</a>
               </li>
+              {% endif %}
             </ul>
             </div>
           </div>

@@ -10,4 +10,5 @@ urlpatterns = [
   path('errors/<int:pk>/update/', views.ErrorUpdate.as_view(), name='error_update'),
   path('errors/<int:pk>/delete/', views.ErrorDelete.as_view(), name='error_delete'),
   path('errors/<int:error_id>/add_comment/', views.add_comment, name='add_comment'),
+  path('accounts/signup/', views.signup, name='signup'),
 ]
