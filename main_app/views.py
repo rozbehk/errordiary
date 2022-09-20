@@ -66,3 +66,13 @@ def signup(request):
   form = RegisterUserForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
+
+def search(request):
+  if request.method == 'GET':       
+      title =  request.GET.get('search')      
+      errors = Error.objects.filter(title__icontains=title)
+      return render(request," search_results.html",{"errors":errors})
+  else:
+      return render(request," search_results.html",{})
+def user_profile():
+  pass
