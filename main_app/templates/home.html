@@ -3,23 +3,23 @@
 {% block content %}
 <form class="d-flex p-2" role="search">
     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success" type="submit">Search</button>
+    <button class="btn btn-outline" type="submit">Search</button>
   </form>
   <hr>
 <div class="container d-flex flex-column align-items-center justify-content-center">
   {% for error in errors %}
   {% csrf_token %}
-  <div class="card center" style="width: 85%;">
+  <div class="card" style="width: 85%;">
     <a href="{% url 'error_detail' error.id %}" class="text-decoration-none text-black">
     <div class="card-body">
       <h5 class="card-title">{{ error.title }}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">{{ error.language }}</h6>
+      <h6 class="card-subtitle mb-2">{{ error.language }}</h6>
       <p class="card-text">{{ error.description }}</p>
       <p class="card-text">{{ error.date }}</p>
       {% if error.solution %}
-      <p class="card-text">Solved</p>
+      <p class="card-text solved">Solved</p>
       {% else %}
-      <p class="card-text">Unsolved</p>
+      <p class="card-text unsolved">Unsolved</p>
       {% endif %}
     </div>
     </a>

@@ -1,5 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container d-flex flex-column align-items-center justify-content-center">
+    <div class="card justify-content-center" style="width: 85%; margin-top: 15px;">
+        <div class="card-body justify-content-center">
+        <h5 class="card-title">{{error.title}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{error.language}}</h6>
+        <p class="card-text">{{error.description}}</p>
 
+
+        <hr>
+        <form action="{% url 'add_comment' error.id %}" method="POST">
+            {% csrf_token %}
+            <h6>Add a Comment:</h6>
+            <span class="comment-box">{{comment_form.text_input}}</span>
+            <h6>Date:</h6> {{comment_form.date}}
+            <input type="submit" value="Submit!" class="btn">
+        </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
