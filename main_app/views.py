@@ -68,9 +68,6 @@ def signup(request):
   return render(request, 'registration/signup.html', context)
 
 
-
-
-
 def search(request):
   if request.method == 'GET':       
       title =  request.GET.get('search')      
