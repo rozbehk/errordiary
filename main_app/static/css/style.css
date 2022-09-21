@@ -16,9 +16,9 @@ body {
     height: 100vh;
   }
   
-.container {
+/* .container {
     height:100%;
-}
+} */
 
 body {
     background-color: #2c3531;
@@ -69,8 +69,4 @@ body {
 
 .comment-box {
     display: block;
-}
-
-.comment-card {
-    text-align: right;
 }
