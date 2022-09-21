@@ -8,10 +8,10 @@
   </form>
   <hr>
 <div class="container d-flex flex-column align-items-center">
-  {% comment %} {% for error in errors %} {% endcomment %}
+  {% for error in errors %}
   {% csrf_token %}
   <div class="card" style="width: 85%;">
-    {% comment %} <a href="{% url 'error_detail' error.id %}" class="text-decoration-none text-black"> {% endcomment %}
+    <a href="{% url 'error_detail' error.id %}" class="text-decoration-none text-black">
     <div class="card-body">
       <h5 class="card-title">{{ error.title }}</h5>
       <h6 class="card-subtitle mb-2">{{ error.language }}</h6>
@@ -25,6 +25,6 @@
     </div>
     </a>
   </div>
-  {% comment %} {% endfor %} {% endcomment %}
+  {% endfor %}
 </div>
 {% endblock %}
