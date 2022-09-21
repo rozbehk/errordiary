@@ -23,7 +23,7 @@ class ErrorUpdate(LoginRequiredMixin, UpdateView):
 
 class ErrorDelete(LoginRequiredMixin, DeleteView):
   model = Error
-  success_url = '/'
+  success_url = '/errors/'
 
 def home(request):
   errors = Error.objects.all()
