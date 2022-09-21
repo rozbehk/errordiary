@@ -12,17 +12,14 @@ h1 {
     color: #ffcb9a
 }
 
-body {
-    height: 100vh;
-  }
-  
 .login-container, .add-container {
     height:100%;
     margin-top: 40px;
 }
-
+  
 body {
     background-color: #2c3531;
+    height: 100vh;
 }
 
 .navbar{
@@ -70,8 +67,4 @@ body {
 
 .comment-box {
     display: block;
-}
-
-.comment-card {
-    text-align: right;
 }

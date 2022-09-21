@@ -80,6 +80,7 @@ DATABASES = {
         'NAME': 'errordiary',
         # 'USER': 'postgres',
         # 'PASSWORD': '1234',
+        # 'PASSWORD': 'Room1401!',
     }
 }
 
