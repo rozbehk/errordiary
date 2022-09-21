@@ -13,4 +13,7 @@ urlpatterns = [
   path('errors/profile/', views.user_profile, name='user_profile'),
   path('errors/search', views.search, name='search'),
   path('accounts/signup/', views.signup, name='signup'),
+  path('challenges/', views.challenges_index, name='challenge_index'),
+  path('challenges/<int:challenge_id>', views.challenge_detail, name='challenge_detail'),
+  path('scrape/', views.scrape, name='scrape'),
 ]

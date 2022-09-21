@@ -8,3 +8,4 @@ from .models import *
 admin.site.register(Error)
 admin.site.register(Comment)
 admin.site.register(Screenshot)
+admin.site.register(Challenge)
