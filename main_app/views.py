@@ -67,6 +67,7 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
+
 def search(request):
   if request.method == 'GET':       
       title =  request.GET.get('search')      
@@ -74,5 +75,6 @@ def search(request):
       return render(request,"errors/search_results.html",{"errors":errors})
   else:
       return render(request,"errors/search_results.html",{})
-def user_profile():
-  pass
+def user_profile(request):
+  errors = Error.objects.filter(user_id = request.user.id)
+  return render(request, 'home.html', { 'errors': errors })
