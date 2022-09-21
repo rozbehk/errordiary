@@ -58,8 +58,8 @@ class Problem(models.Model):
     return self.title
 
 class UserAvatar(models.Model):
-  avatar = models.ImageField(upload_to=None)
-  user = models.OneToOneField(User)
+  avatar = models.CharField(max_length=500)
+  user = models.OneToOneField(User, on_delete=models.CASCADE)
 
   def set_avatar(self):
        self.has_picture = True

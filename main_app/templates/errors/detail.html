@@ -7,7 +7,9 @@
         <h5 class="card-title">{{error.title}}</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{error.language}}</h6>
         <p class="card-text">{{error.description}}</p>
-
+        <div class="card-action">
+            <a href="{% url 'error_delete' error.id %}" class="btn">Delete</a>
+        </div>
         <hr>
         <form action="{% url 'add_comment' error.id %}" method="POST">
             {% csrf_token %}
@@ -31,4 +33,5 @@
     </div>
     {% endfor %}
 </div>
+
 {% endblock %}
