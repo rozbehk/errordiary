@@ -8,6 +8,7 @@
         <h6 class="card-subtitle mb-2 text-muted">{{error.language}}</h6>
         <p class="card-text">{{error.description}}</p>
         <div class="card-action">
+            <a href="{% url 'error_update' error.id %}" class="btn">Edit</a>
             <a href="{% url 'error_delete' error.id %}" class="btn">Delete</a>
         </div>
         <hr>
@@ -15,8 +16,10 @@
             {% csrf_token %}
             <h6>Add a Comment:</h6>
             <span class="comment-box">{{comment_form.text_input}}</span>
+            <br>
             <h6>Date:</h6> {{comment_form.date}}
-            <input type="submit" value="Submit!" class="btn">
+            <br>
+            <input type="submit" value="Submit" class="btn">
         </form>
         </div>
     </div>

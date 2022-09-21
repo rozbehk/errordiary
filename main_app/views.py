@@ -19,11 +19,11 @@ class ErrorCreate(LoginRequiredMixin, CreateView):
 
 class ErrorUpdate(LoginRequiredMixin, UpdateView):
   model = Error
-  fields = ['title', 'language','description', 'solution','date']
+  form_class = ErrorForm
 
 class ErrorDelete(LoginRequiredMixin, DeleteView):
   model = Error
-  success_url = '/errors/'
+  success_url = '/'
 
 def home(request):
   errors = Error.objects.all()
@@ -52,6 +52,7 @@ def add_comment(request, error_id):
   if form.is_valid():
     new_comment = form.save(commit=False)
     new_comment.error_id = error_id
+    new_comment.user_id = request.user.id
     new_comment.save()
   return redirect('error_detail', error_id=error_id)
 
