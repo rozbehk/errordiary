@@ -10,11 +10,11 @@
 <div class="container d-flex flex-column align-items-center">
   {% for error in errors %}
   {% csrf_token %}
-  <div class="card" style="width: 85%;">
+  <div class="card" style="width: 85%; margin-top: 5px;">
     <a href="{% url 'error_detail' error.id %}" class="text-decoration-none text-black">
     <div class="card-body">
       <h5 class="card-title">{{ error.title }}</h5>
-      <h6 class="card-subtitle mb-2">{{ error.language }}</h6>
+      <h6 class="card-subtitle mb-2">Language: {{ error.language }} - User: {{ error.user }}</h6>
       <p class="card-text">{{ error.description }}</p>
       <p class="card-text">{{ error.date }}</p>
       {% if error.solution %}
