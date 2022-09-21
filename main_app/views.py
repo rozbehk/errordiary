@@ -35,7 +35,7 @@ def about(request):
 @login_required
 def errors_index(request):
   errors = Error.objects.filter(user=request.user)
-  return render(request, 'errors/index.html', { 'errors': errors })
+  return render(request, 'home.html', { 'errors': errors })
 
 @login_required
 def errors_detail(request, error_id):

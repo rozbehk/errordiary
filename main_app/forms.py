@@ -3,6 +3,7 @@ from .models import Error,Comment
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from datetime import date
 
 class DateInput(forms.DateInput):
   input_type = 'date'
@@ -24,6 +25,7 @@ class ErrorForm(ModelForm):
     self.fields['solution'].widget.attrs['style'] = 'width:600px; height:100px;'
     self.fields['solution'].required = False
     self.fields['date'].widget.attrs['class'] = 'form-control'
+    self.fields['date'].widget.attrs['value'] = date.today()
 
 class CommentForm(ModelForm):
   date = forms.DateField(widget=DateInput)
@@ -36,6 +38,7 @@ class CommentForm(ModelForm):
     self.fields['text_input'].widget.attrs['class'] = 'form-control'
     self.fields['date'].widget.attrs['class'] = 'form-control'
     self.fields['date'].widget.attrs['style'] = 'width:200px; height:40px;'
+    self.fields['date'].widget.attrs['value'] = date.today()
 
 class RegisterUserForm(UserCreationForm):
   email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
