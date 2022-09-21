@@ -78,13 +78,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'errordiary',
-<<<<<<< HEAD
         'USER': 'postgres',
         'PASSWORD': 'Room1401!',
-=======
-        # 'USER': 'postgres',
-        # 'PASSWORD': '1234',
->>>>>>> 47d30e91d973ee222c528220288a19c0bcdb726b
     }
 }
 
