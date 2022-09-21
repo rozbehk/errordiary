@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Error, Comment,Screenshot
+from .models import Error, Comment,Screenshot,Challenge
 from .forms import CommentForm,ErrorForm, RegisterUserForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+import requests
+from bs4 import BeautifulSoup
+
 
 class ErrorCreate(LoginRequiredMixin, CreateView):
   model = Error
@@ -77,3 +80,36 @@ def search(request):
 def user_profile(request):
   errors = Error.objects.filter(user_id = request.user.id)
   return render(request, 'home.html', { 'errors': errors })
+
+
+def challenges_index(request):
+  challenges = Challenge.objects.all()
+  return render(request, 'challenges/index.html', { 'problems': challenges })
+
+def challenge_detail(request, challenge_id):
+  challenge = Challenge.objects.get(id=challenge_id)
+  return render(request, 'challenges/detail.html', {'problem': challenge})
+
+def scrape(request):
+    data = requests.get('https://projecteuler.net/archives;page=10')
+    soap = BeautifulSoup(data.content, 'html5lib')
+    page_no = soap.find(class_='pagination noprint').find_all('a')[-1].text
+    for page in range(1 , int(page_no)+1):
+        page =  requests.get(f'https://projecteuler.net/archives;page={page}')
+        soap = BeautifulSoup(page.content, 'html5lib')
+        last_problem_no = soap.find_all(class_='id_column')[-1].text
+        first_problem_number = soap.find_all(class_='id_column')[1].text
+        for problem in range(int(first_problem_number),int(last_problem_no)+1):
+            print(f'page number: {page} problem number: {problem}')
+            problem_model = Challenge()
+            problem_data = requests.get(f'https://projecteuler.net/problem={problem}')
+            soap = BeautifulSoup(problem_data.content, 'html5lib')
+            problem_model.title = soap.find_all('h2')[0].text
+            problem_model.problem = soap.find_all('h3')[0].text
+            problem_model.description = soap.find_all(class_='problem_content')[0].text
+            problem_model.save()
+        
+    return redirect('/')
+
+
+

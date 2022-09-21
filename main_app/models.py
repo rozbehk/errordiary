@@ -65,6 +65,16 @@ class UserAvatar(models.Model):
        self.has_picture = True
 
 
+class Challenge(models.Model):
+  title = models.CharField(max_length=1000)
+  problem = models.CharField(max_length=1000)
+  description = models.TextField()
+
+  def __str__(self):
+    return self.title
+
+
+
 # class Upvote(models.Model):
 #   error = models.ForeignKey(Error, on_delete=models.CASCADE)
 #   # user = models.ForeignKey(User, on_delete=models.CASCADE)
