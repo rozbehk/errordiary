@@ -3,14 +3,13 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Error, Comment,Screenshot
 from .forms import CommentForm,ErrorForm, RegisterUserForm
 from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 class ErrorCreate(LoginRequiredMixin, CreateView):
   model = Error
-  fields = ['title', 'language','description', 'solution','date']
 
+  form_class = ErrorForm
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)

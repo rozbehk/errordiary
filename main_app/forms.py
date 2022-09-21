@@ -4,10 +4,26 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 
+class DateInput(forms.DateInput):
+  input_type = 'date'
 class ErrorForm(ModelForm):
+
+  date = forms.DateField(widget=DateInput)
   class Meta:
     model = Error
-    fields = ['title', 'language','description', 'solution']
+    fields = ['title', 'language','description', 'solution', 'date']
+
+  def __init__(self, *args, **kwargs):
+    super(ErrorForm, self).__init__(*args, **kwargs)
+    self.fields['title'].widget.attrs['class'] = 'form-control'
+    self.fields['title'].widget.attrs['style'] = 'width:600px; height:40px;'
+    self.fields['language'].widget.attrs['class'] = 'form-control'
+    self.fields['description'].widget.attrs['class'] = 'form-control'
+    self.fields['description'].widget.attrs['style'] = 'width:600px; height:100px;'
+    self.fields['solution'].widget.attrs['class'] = 'form-control'
+    self.fields['solution'].widget.attrs['style'] = 'width:600px; height:100px;'
+    self.fields['solution'].required = False
+    self.fields['date'].widget.attrs['class'] = 'form-control'
 
 class CommentForm(ModelForm):
   class Meta:
