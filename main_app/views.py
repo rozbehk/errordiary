@@ -1,14 +1,14 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-import uuid
-import boto3
-from .models import Error, Comment, Screenshot, Challenge, Screenshot
-from .forms import CommentForm,ErrorForm, RegisterUserForm
+from .models import Error, Comment, Screenshot, Challenge, User
+from .forms import CommentForm, ErrorForm, RegisterUserForm, UserUpdateForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 import requests
 from bs4 import BeautifulSoup
+import uuid
+import boto3
 
 S3_BASE_URL = 'https://s3-website.ca-central-1.amazonaws.com'
 BUCKET = 'errordiary'
