@@ -80,3 +80,10 @@ body {
     margin: 3px;
     height: 175px;
 }
+
+.img-files {
+    width: 100px;
+    height: 100px;
+    display: inline;
+    margin: 3px;
+}

@@ -1,12 +1,17 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Error, Comment,Screenshot,Challenge
+import uuid
+import boto3
+from .models import Error, Comment, Screenshot, Challenge, Screenshot
 from .forms import CommentForm,ErrorForm, RegisterUserForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 import requests
 from bs4 import BeautifulSoup
+
+S3_BASE_URL = 'https://s3-website.ca-central-1.amazonaws.com'
+BUCKET = 'errordiary'
 
 
 class ErrorCreate(LoginRequiredMixin, CreateView):
@@ -112,5 +117,17 @@ def scrape(request):
         
     return redirect('/')
 
-
-
+def add_screenshot(request, error_id):
+  screenshot_file = request.FILES.get('screenshot-file', None)
+  print(screenshot_file)
+  if screenshot_file:
+    s3 = boto3.client('s3')
+    key = uuid.uuid4().hex[:6] + screenshot_file.name[screenshot_file.name.rfind('.'):]
+    try:
+      s3.upload_fileobj(screenshot_file, BUCKET, key)
+      url = f"{S3_BASE_URL}/{BUCKET}/{key}"
+      screenshot = Screenshot(url=url, error_id=error_id, user=request.user)
+      screenshot.save()
+    except:
+      print('An Error occurred uploading file to S3')
+  return redirect(f'/errors/{error_id}', error_id=error_id)
