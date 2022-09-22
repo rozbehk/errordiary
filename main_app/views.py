@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 import uuid
 import boto3
 
-S3_BASE_URL = 'https://s3-website.ca-central-1.amazonaws.com'
+S3_BASE_URL = 'https://s3.ca-central-1.amazonaws.com'
 BUCKET = 'errordiary'
 
 
