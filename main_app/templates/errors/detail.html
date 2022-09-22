@@ -23,6 +23,13 @@
         <hr>
         {% endif %}
 
+        {% if error.solution %}
+        {% csrf_token %}
+        <div class="card-text">{{ error.solution }}</div>
+        {% else %}
+
+        {% endif %}
+
         {% for screenshot in error.screenshot_set.all %}
         <img src="{{screenshot.url}}" alt="screenshot" class="img-files">   
         {% endfor %}
