@@ -12,7 +12,20 @@
             <a href="{% url 'error_update' error.id %}" class="btn">Edit</a>
             <a href="{% url 'error_delete' error.id %}" class="btn">Delete</a>
         </div>
+        
+        <hr>
+            <form action="{% url 'add_screenshot' error.id %}" enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+                <input type="file" name="screenshot-file">
+                <br><br>
+                <input type="submit" class="btn" value="Upload Photo">
+            </form>    
+        <hr>
         {% endif %}
+
+        {% for screenshot in error.screenshot_set.all %}
+        <img src="{{screenshot.url}}" alt="screenshot" class="img-files">   
+        {% endfor %}
         <hr>
         <form action="{% url 'add_comment' error.id %}" method="POST">
             {% csrf_token %}
@@ -30,7 +43,7 @@
     {% csrf_token %}
     <div class="card" style="width: 85%; margin-top: 5px;">
         <div class="card-body">
-            <h5>Comment by -insert username-</h5>
+            <h5>Comment by {{comment.user}}</h5>
             <h6>{{ comment.date }}</h6>
             <hr>
             <p>{{ comment.text_input }}</p>
