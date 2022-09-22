@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Error, Comment,Screenshot,Challenge
-from .forms import CommentForm,ErrorForm, RegisterUserForm
+from .models import Error, Comment, Screenshot, Challenge, User
+from .forms import CommentForm, ErrorForm, RegisterUserForm, UserUpdateForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -70,7 +70,6 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
-
 def search(request):
   if request.method == 'GET':       
       title =  request.GET.get('search')      
@@ -78,10 +77,28 @@ def search(request):
       return render(request,"errors/search_results.html",{"errors":errors})
   else:
       return render(request,"errors/search_results.html",{})
-def user_profile(request):
-  errors = Error.objects.filter(user_id = request.user.id)
-  return render(request, 'home.html', { 'errors': errors })
 
+@login_required
+def user_profile(request):
+  message = ''
+  if request.method == 'POST':
+    user = User.objects.get(id=request.user.id)
+    update_form = UserUpdateForm(request.POST, instance=user)
+    if update_form.is_valid():
+      update_form.save()
+      message = f'Your profile has been updated!'
+      return redirect('user_profile')
+
+  else:
+    user = User.objects.get(id=request.user.id)
+    update_form = UserUpdateForm(instance=user)
+
+  context = {
+    'user': user,
+    'update_form': update_form,
+    'message': message
+    }
+  return render(request, 'user/detail.html', context)
 
 def challenges_index(request):
   challenges = Challenge.objects.all()

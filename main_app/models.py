@@ -64,6 +64,8 @@ class UserAvatar(models.Model):
   def set_avatar(self):
        self.has_picture = True
 
+  def __str__(self):
+    return f'{self.user.username} Profile'
 
 class Challenge(models.Model):
   title = models.CharField(max_length=1000)
