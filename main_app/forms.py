@@ -26,7 +26,7 @@ class ErrorForm(ModelForm):
     self.fields['solution'].required = False
     self.fields['date'].widget.attrs['class'] = 'form-control'
     self.fields['date'].widget.attrs['value'] = date.today()
-    self.fields['date'].widget.attrs['disabled'] = True
+    self.fields['date'].widget.attrs['readonly'] = True
 
 class CommentForm(ModelForm):
   date = forms.DateField(widget=DateInput)
@@ -40,7 +40,7 @@ class CommentForm(ModelForm):
     self.fields['date'].widget.attrs['class'] = 'form-control'
     self.fields['date'].widget.attrs['style'] = 'width:200px; height:40px;'
     self.fields['date'].widget.attrs['value'] = date.today()
-    self.fields['date'].widget.attrs['disabled'] = True
+    self.fields['date'].widget.attrs['readonly'] = True
 
 class RegisterUserForm(UserCreationForm):
   email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
